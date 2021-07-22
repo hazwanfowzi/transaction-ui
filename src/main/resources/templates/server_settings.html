@@ -1,0 +1,9 @@
+define([], function() {
+		'use strict';
+	
+		var ServerSettings = {
+			APPLICATION_ROOT_CONTEXT : '[[${env.getProperty("server.servlet.context-path")}]]',
+		};
+	
+		return ServerSettings;
+	});

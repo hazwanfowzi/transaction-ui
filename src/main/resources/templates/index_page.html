@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	th:replace="~{master_template :: master_template (#{title.page},'index_page')}">
+	
+	<th:block th:fragment="header">
+		<link rel="stylesheet" th:href="@{/resources/css/index/index.css}">
+	</th:block>
+	
+	<th:block th:fragment="scripts">
+		require(['require-main'], function() {
+    		require(['maybank/index/index'], function(IndexPage) {
+    			IndexPage.init();
+      		});
+    	});
+	</th:block>	
+	
+	<th:block th:fragment="content">
+		<h1 th:text="#{content.index.h1.title}"></h1>
+		
+		<div class="page-content">
+			<div class="content-1">
+				<h3 th:text="#{content.form.header.text}"></h3>
+				<form name="form_uploadFile" id="form_uploadFile" enctype="multipart/form-data">
+					<table>
+						<tr>
+							<td th:text="#{form.upload.label.file}"></td>
+							<td>:</td>
+							<td><input type="file" class="form-control" id="fu_fileInput" name="fu_fileInput"></td>
+						</tr>
+						<tr>
+							<td colspan="2"></td>
+							<td>
+								<input type="submit" th:value="#{form.upload.submit.btn}" id="btn_submit" class="btn btn-sm btn-primary" />
+					        	<input type="reset" th:value="#{form.upload.reset.btn}"  class="btn btn-sm btn-default"/>
+					        </td>
+						</tr>
+					</table>
+			    </form>
+			</div>
+			<div class="content-2">
+				<h3 th:text="#{form.search.trx.title}"></h3>
+				<form name="form_searchtrx" id="form_searchtrx" enctype="multipart/form-data">
+					<table>
+						<tr>
+							<td th:text="#{form.search.trx.label.custid}"></td>
+							<td>:</td>
+							<td><input type="text" name="in_cust_id" id="in_cust_id"/></td>
+						</tr>
+						<tr>
+							<td th:text="#{form.search.trx.label.acctno}"></td>
+							<td>:</td>
+							<td><input type="text" name="in_account_no" id="in_account_no"/></td>
+						</tr>
+						<tr>
+							<td th:text="#{form.search.trx.label.desc}"></td>
+							<td>:</td>
+							<td><input type="text" name="in_description" id="in_description"/></td>
+						</tr>
+						<tr>
+							<td colspan="2"></td>
+							<td>
+								<input type="submit" th:value="#{form.upload.submit.btn}" id="btn_submit" class="btn btn-sm btn-primary" />
+					        	<input type="reset" th:value="#{form.upload.reset.btn}"  class="btn btn-sm btn-default"/>
+					        </td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+	</th:block>
+</html>

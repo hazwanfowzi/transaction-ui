@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+		<meta charset="utf-8" />
+		<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+		<title th:text="#{login.page.title}"></title>
+		
+		<link rel="stylesheet" th:href="@{/resources/plugins/bootstrap/css/bootstrap.min.css}">  	
+		<link rel="stylesheet" th:href="@{/resources/plugins/bootstrap/css/bootstrap-theme.css}">  		
+		<link rel="stylesheet" th:href="@{/resources/plugins/bootstrap/css/bootstrap-select.min.css}">
+		<link rel="stylesheet" th:href="@{/resources/stylesheets/bootstrap-multiselect.css}">
+		<link rel="stylesheet" th:href="@{/resources/plugins/fa/css/font-awesome.min.css}">
+		<link rel="stylesheet" th:href="@{/resources/css/index/index.css}">
+	</head>
+	<body>
+		<div class = "container container-fluid" style="margin-top: 3em;">
+			<div class = "row">
+				<div class="col-md-6 col-md-offset-3 login-screen-logo">
+			    </div>
+			</div>
+			<br/><br/>
+			<div class = "row">
+				<div class = "col-md-6 col-md-offset-3">
+					<h1 th:text="#{login.page.h1.text}"></h1>
+					<form th:action="@{/login}" method="post">
+					
+						<!-- error message -->
+						<div th:if="${param.error}">
+							<div class="alert alert-danger" th:text="#{login.page.msg.error}"></div>
+						</div>
+					
+							<!-- logout message -->
+						<div th:if="${param.logout}">
+							<div class="alert alert-info" th:text="#{login.page.msg.logout}"></div>
+						</div>
+						
+						<div class = "form-group">
+							<label for ="username" th:text="#{login.screen.label.user.text}"></label>
+							<input type="text" class = "form-control" id ="username" name = "username" placeholder="Enter Email ID" autofocus="autofocus" />
+						</div>
+						<div class="form-group">
+							<label for="password" th:text="#{login.screen.label.password.text}"></label> 
+							<input type="password" id="password" name="password" class="form-control" placeholder="Enter Password" />
+						</div>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-6 col-sm-offset-3">
+									<input type="submit" name="login-submit" id="login-submit" class="form-control btn btn-primary" value="Log In" />
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

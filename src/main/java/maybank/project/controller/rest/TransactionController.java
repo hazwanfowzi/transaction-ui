@@ -75,9 +75,22 @@ public class TransactionController {
 	
 //	@GetMapping(path = "")
 	@GetMapping("/getByCustomerIDPagination")
-	public Page<TransactionDTO> findAll(@RequestParam("customerID") Optional<String> customerID, @RequestParam("accountNumber") Optional<String> accountNumber, 
+	public ResponseMessage getByCustomerIDPagination(@RequestParam("customerID") Optional<String> customerID, @RequestParam("accountNumber") Optional<String> accountNumber, 
 											@RequestParam("trxDescription") Optional<String> trxDescription, Integer pageNo, Integer pageSize) {
-
-		return transactionService.findAll(customerID, accountNumber, trxDescription, pageNo, pageSize);
+		ResponseMessage message = new ResponseMessage();
+		try {
+			Page<TransactionDTO> result = transactionService.findAll(customerID, accountNumber, trxDescription, pageNo, pageSize);
+			
+			message.setStatus(ResponseMessage.OK);
+			message.setData(result);
+			return  message;
+		}catch (Exception e) {
+			e.printStackTrace();
+			message.setCode(GenericErrorCode.GENERIC_ERROR);
+			message.setStatus(ResponseMessage.ERROR);
+			message.setDescription(messages.get("error.internal"));
+			return message;
+		}
+		
 	}
 }
