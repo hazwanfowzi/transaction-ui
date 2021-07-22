@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.5.2</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>maybank.project</groupId>
+	<artifactId>transaction-ui</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>transaction-ui</name>
+	<description>Transaction Test for Maybank</description>
+	<properties>
+		<java.version>1.8</java.version>
+		<libsass-maven-plugin.version>0.2.8-libsass_3.4.4</libsass-maven-plugin.version>
+	    <minify-maven-plugin.version>1.7.6</minify-maven-plugin.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-security</artifactId>
+	    </dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework.boot</groupId> -->
+<!-- 			<artifactId>spring-boot-starter-batch</artifactId> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework.batch</groupId> -->
+<!-- 			<artifactId>spring-batch-test</artifactId> -->
+<!-- 			<scope>test</scope> -->
+<!-- 		</dependency> -->
+		
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+		    	<groupId>org.springframework.boot</groupId>
+		    	<artifactId>spring-boot-maven-plugin</artifactId>       
+		        <executions>
+		          	<execution>
+		            	<!-- Spring Boot Actuator displays build-related information
+		              		if a META-INF/build-info.properties file is present -->
+		            	<id>build-info</id>
+		            	<goals>
+		              		<goal>build-info</goal>
+		            	</goals>
+		            	<configuration>
+		              		<additionalProperties>
+		                		<encoding.source>${project.build.sourceEncoding}</encoding.source>
+		                		<encoding.reporting>${project.reporting.outputEncoding}</encoding.reporting>
+		              			<java.source>${maven.compiler.source}</java.source>
+		                		<java.target>${maven.compiler.target}</java.target>
+		              		</additionalProperties>             
+		            	</configuration>
+		          	</execution>
+		    	</executions>
+	      	</plugin>
+		
+			<plugin>
+		  		<artifactId>maven-resources-plugin</artifactId>
+<!-- 		  		<version>3.0.2</version> -->
+		  		<executions>
+		    		<execution>
+		    			<id>copy-resources</id>
+		    			<!-- insert here the phase you need -->
+		    			<phase>validate</phase>
+		    			<goals>
+		      				<goal>copy-resources</goal>
+		    			</goals>
+		    			<configuration>
+		      				<outputDirectory>${basedir}/target/classes/static/resources/css/images/shared/</outputDirectory>
+		      				<resources>        
+		        				<resource>
+		        					<directory>src/main/resources/static/resources/images/shared/</directory>
+		        					<includes>
+          								<include>**/ajax*.gif</include>
+        							</includes>
+		        					<filtering>true</filtering>
+		        				</resource>
+		      				</resources>          
+		    			</configuration>        
+		    		</execution>
+		  		</executions>
+			</plugin>
+		
+			<plugin>
+				<groupId>com.github.warmuuh</groupId>
+                <!-- groupId>com.gitlab.haynes</groupId -->
+                <artifactId>libsass-maven-plugin</artifactId>
+                <version>${libsass-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <inputPath>${basedir}/src/sass/</inputPath>
+                    <outputPath>${project.build.directory}/classes/static/resources/css</outputPath>
+                    <outputStyle>compressed</outputStyle>
+                    <generateSourceMap>false</generateSourceMap>                   
+                </configuration>
+            </plugin>
+		</plugins>
+	</build>
+
+</project>
