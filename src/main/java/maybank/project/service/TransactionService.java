@@ -45,6 +45,7 @@ public class TransactionService {
     	dto.setTrxDescription(entity.getTrxDescription());
     	dto.setTrxDate(entity.getTrxDate());
     	dto.setTrxTime(entity.getTrxTime());
+    	dto.setCustomerID(entity.getCustomerID());
 
 		return dto;
 	}

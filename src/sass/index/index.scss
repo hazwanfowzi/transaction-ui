@@ -7,57 +7,42 @@ h1{
 .page-content{
 	width:100%;
 	
-	.content-1{
-		float: left;
-		width:35%;
-		
-		.content-label{
-			width:5em;
-		}
-		
-		table{
-			margin: 1em;
-			
-			tr{
-				td{
-					padding: 0.5em 0.5em;
+	.row{
+		div.col-md-6{
+			form{
+				table{
+					margin: 0em;
 					
-					select{
-						padding: 0.2em;
-    					width: 100%;
-					}
-					
-					input{
-						padding-left: 0.2em;
-					}
-				}
-			}
-		}
-	}
-	.content-2{
-//		float: right;
-//		width:65%;
-		
-		.content-label{
-			width:5em;
-		}
-		
-		table{
-			margin-right: 1em;
-			
-			tr{
-				td{
-					padding: 0.5em 0.5em;
-					
-					input{
-						padding-left: 0.2em;
+					tr{
+						td{
+							padding: 0.5em 0.5em;
+							
+							select{
+								padding: 0.2em;
+		    					width: 100%;
+							}
+							
+							input{
+								padding-left: 0.2em;
+							}
+							
+							input[type="number"]{
+								width: 3em;
+							}
+						}
 					}
 				}
 			}
 		}
 		
-		p{
-			margin-top: 0.5em;
+		div.col-md-12{
+			table{
+				th,td{
+					padding-left: 1em !important;
+				}
+			}
 		}
 	}
+	
+	
 }

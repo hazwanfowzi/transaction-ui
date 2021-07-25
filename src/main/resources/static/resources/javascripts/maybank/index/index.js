@@ -8,12 +8,10 @@
  **/
 define([
 	'maybank/utils/ajax-request',
-	'maybank/utils/link-const',
-//	'bootstrapSelect'
+	'maybank/utils/link-const'
 ], function(
 		Request,
-		LinkConst,
-//		bootstrapSelect
+		LinkConst
 		) {
 	'use strict';
 	
@@ -25,19 +23,23 @@ define([
 		 * @private
 		 */
 		_bindAction: function() {
+			var self=this;
+			
 			$("form#form_searchtrx").submit(function(e) {
 			    e.preventDefault();
 
 				const customerID = $('#in_cust_id').val();
 				const accountNumber = $('#in_account_no').val();
 				const trxDescription = $('#in_description').val();
+				const pageNo = $('#in_page_no').val();
+				const pageSize = $('#in_page_size').val();
 	
 				let formData = {
 					'customerID': customerID,
 					'accountNumber': accountNumber,
 					'trxDescription': trxDescription,
-					'pageNo': 1,
-					'pageSize': 2
+					'pageNo': pageNo,
+					'pageSize': pageSize
 				};
 				
 				Request.get(
@@ -46,21 +48,13 @@ define([
 					_.bind(function(result) {
 						if (result.status === Request.Result.OK) {
 							var data = result.data;
-							var listOfDate = data.subscriptionDate;
-							
-//							$('#in_date_out').val(data.subscriptionDate[0] + "  " + data.invoiceDay);
-//							$('#in_invoice_amount_out').val('$ ' + data.invoiceAmount);
-//							$('#in_subs_type_out').val(data.subscriptionType);
-//							
-//							$('#txtarea_follow_date').val(data.subscriptionDate.join("\n"));
+							self._generateResultTable(data);
 						}else{
 							alert(messages('error.data.problem'));
 						}
 					}, this)
 				);
 			});
-			
-//			$('#dd_subs_type').selectpicker('render');
 		},
 		
 		/**
@@ -106,8 +100,6 @@ define([
 					    }, false);
 					    return xhr;
 					},
-				
-				
 			        type: "POST",
 			        enctype: 'multipart/form-data',
 			        url: LinkConst.Transaction.POST_EXTRACT,
@@ -117,19 +109,40 @@ define([
 			        cache: false,
 			        timeout: 600000,
 			        success: function (data) {
+						alert("Extraction completed!");
 			            console.log("SUCCESS : ", data);
-						if (data && data.status) {
-							Notification.info(data.message + ' extraction initializing...', undefined);
-						}
-						
 			        },
 			        error: function (e) {
 			            console.log("ERROR : ", e);
-						Notification.error('Ops, something went wrong.', undefined);
-						// Notification.notyMessage(e.message + ' Ops, something went wrong.', 'error', undefined);
-			
 			        }
 			    });
+			});
+		},
+		
+		/**
+		 * Generate content for result table.
+		 * 
+		 * @returns {void}
+		 * @private
+		 */
+		_generateResultTable: function(data){
+			var dataContent = data.content;
+			
+			var tableObj = $('#table_result');
+			tableObj.append('<th>ID</th><th>Account Number</th><th>Amount (RM)</th><th>Transaction Description</th>' + 
+							'<th>Transaction Date</th><th>Transaction Time</th><th>Customer ID</th>');
+			
+			_.each(dataContent, function(item){
+				var itemTR = $('<tr>');
+				
+				_.each( item, function( key, value ){
+					
+					var itemTD = $('<td>').text(key);
+					itemTR.append(itemTD);
+//				  	alert( key + ": " + value );
+				});
+				
+				tableObj.append(itemTR);
 			});
 		}
 	});
