@@ -10,8 +10,8 @@ Requirement
 
 Command
 
-  1. Run project : mvn spring-boot:run
-  2. Compile project : mvn clean install -DskipTests=true
+  1. Compile project : mvn clean install -DskipTests=true
+  2. Run project : mvn spring-boot:run
 
 URL
   1. Web-based : http://localhost:8080/transaction-ui/
