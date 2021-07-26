@@ -37,11 +37,11 @@
 						
 						<div class = "form-group">
 							<label for ="username" th:text="#{login.screen.label.user.text}"></label>
-							<input type="text" class = "form-control" id ="username" name = "username" placeholder="Enter Email ID" autofocus="autofocus" />
+							<input type="text" class = "form-control" id ="username" name = "username" th:placeholder="#{login.screen.placeholder.user.text}" autofocus="autofocus" />
 						</div>
 						<div class="form-group">
 							<label for="password" th:text="#{login.screen.label.password.text}"></label> 
-							<input type="password" id="password" name="password" class="form-control" placeholder="Enter Password" />
+							<input type="password" id="password" name="password" class="form-control" th:placeholder="#{login.screen.placeholder.password.text}" />
 						</div>
 						<div class="form-group">
 							<div class="row">

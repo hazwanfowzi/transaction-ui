@@ -128,7 +128,9 @@ define([
 		_generateResultTable: function(data){
 			var dataContent = data.content;
 			
+			
 			var tableObj = $('#table_result');
+			tableObj.empty();
 			tableObj.append('<th>ID</th><th>Account Number</th><th>Amount (RM)</th><th>Transaction Description</th>' + 
 							'<th>Transaction Date</th><th>Transaction Time</th><th>Customer ID</th>');
 			

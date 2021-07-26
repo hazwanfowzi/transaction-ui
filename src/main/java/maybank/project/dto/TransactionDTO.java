@@ -13,6 +13,18 @@ public class TransactionDTO implements Serializable{
 	private String trxTime;
 	private String customerID;
 	
+	public TransactionDTO() {
+    }
+	
+	public TransactionDTO(String accountNumber, String trxAmount, String trxDescription, String trxDate, String trxTime, String customerID) {
+        this.accountNumber = accountNumber;
+        this.trxAmount = trxAmount;
+        this.trxDescription = trxDescription;
+        this.trxDate = trxDate;
+        this.trxTime = trxTime;
+        this.customerID = customerID;
+    }
+	
 	public Long getId() {
 		return id;
 	}
